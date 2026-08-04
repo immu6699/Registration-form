@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Color by Largest Checked Value</title>
+    <style>
+        .submit-btn {
+            background-color: #cccccc; /* Default grey */
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            cursor: not-allowed;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+            width: 280px;
+        }
+
+        /* Colors for different inputs being largest */
+        .submit-btn.color-a {
+            background-color: #FF5733; /* Orange for Input A */
+            color: white;
+            cursor: pointer;
+        }
+
+        .submit-btn.color-b {
+            background-color: #3371FF; /* Blue for Input B */
+            color: white;
+            cursor: pointer;
+        }
+
+        .submit-btn.color-c {
+            background-color: #4CAF50; /* Green for Input C */
+            color: white;
+            cursor: pointer;
+        }
+        .input-group {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+    <form id="valueForm">
+        <h3>Select inputs to compare:</h3>
+        <div class="input-group">
+            <input type="checkbox" id="checkA" class="value-checkbox" checked>
+            <label for="inputA">Input A:</label>
+            <input type="number" id="inputA" class="value-input" value="10">
+        </div>
+        <div class="input-group">
+            <input type="checkbox" id="checkB" class="value-checkbox" checked>
+            <label for="inputB">Input B:</label>
+            <input type="number" id="inputB" class="value-input" value="20">
+        </div>
+        <div class="input-group">
+            <input type="checkbox" id="checkC" class="value-checkbox" checked>
+            <label for="inputC">Input C:</label>
+            <input type="number" id="inputC" class="value-input" value="35">
+        </div>
+        <input type="submit" value="submit">
+        <button type="submit" id="submitButton" class="submit-btn">
+            Determine Color and Submit
+        </button>
+    </form>
+
+    <script>
+        const inputs = document.querySelectorAll('.value-input');
+        const checkboxes = document.querySelectorAll('.value-checkbox');
+        const submitButton = document.getElementById('submitButton');
+        const valueForm = document.getElementById('valueForm');
+
+        function updateButtonColorByLargest() {
+            // Get values only if their corresponding checkbox is checked.
+            // If unchecked, set to -Infinity so it's ignored in max comparison.
+            const a = document.getElementById('checkA').checked ? parseFloat(document.getElementById('inputA').value) || 0 : -Infinity;
+            const b = document.getElementById('checkB').checked ? parseFloat(document.getElementById('inputB').value) || 0 : -Infinity;
+            const c = document.getElementById('checkC').checked ? parseFloat(document.getElementById('inputC').value) || 0 : -Infinity;
+
+            // Remove any previous color classes
+            submitButton.classList.remove('color-a', 'color-b', 'color-c');
+            submitButton.disabled = false;
+
+            // Determine which is the largest value among the checked ones
+            if (a > b && a > c) {
+                submitButton.classList.add('color-a');
+                submitButton.textContent = "A is largest (Orange)";
+            } else if (b > a && b > c) {
+                submitButton.classList.add('color-b');
+                submitButton.textContent = "B is largest (Blue)";
+            } else if (c > a && c > b) {
+                submitButton.classList.add('color-c');
+                submitButton.textContent = "C is largest (Green)";
+            } else {
+                // Handle cases where all inputs are tied or all are unchecked
+                if (a === -Infinity && b === -Infinity && c === -Infinity) {
+                    submitButton.textContent = "Check at least one input";
+                    submitButton.disabled = true;
+                } else {
+                    submitButton.textContent = "Values are tied or invalid";
+                    submitButton.classList.add('color-b'); // Default fallback color
+                }
+            }
+        }
+
+        // Add event listeners to update the button color dynamically as user types or checks/unchecks boxes
+        inputs.forEach(input => {
+            input.addEventListener('input', updateButtonColorByLargest);
+        });
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateButtonColorByLargest);
+        });
+
+        // Call once on load to set initial state based on default values
+        updateButtonColorByLargest();
+
+        // Optional: Prevent actual form submission
+        valueForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            console.log("Form submitted with the current largest value color!");
+            alert("Form submitted! The selected color was based on the currently largest checked value.");
+        });
+    </script>
+</body>
+</html>

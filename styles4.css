@@ -1,0 +1,23 @@
+body {
+    font-family: sans-serif; 
+    background-color: #e0ffe0; 
+    margin: 20px;
+    padding: 20px;
+}
+
+h1 {
+    color: #333; 
+    text-align: center;
+    font-size: 2.5em; 
+    margin-bottom: 1em;
+}
+
+p {
+    color: red;
+    max-width: 800px; 
+    margin: 0 auto 1em auto; 
+    padding: 15px;
+    background-color: #f9f9f9; 
+    border: 1px solid #cccccc; 
+    border-radius: 5px; 
+}

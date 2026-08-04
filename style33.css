@@ -1,0 +1,173 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+
+body{
+
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    linear-gradient(135deg,#020024,#090979,#00d4ff);
+
+}
+
+
+.card{
+
+    width:380px;
+
+    background:
+    rgba(255,255,255,0.12);
+
+    backdrop-filter:blur(15px);
+
+    color:white;
+
+    padding:30px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    box-shadow:
+    0 20px 40px rgba(0,0,0,0.4);
+
+    border:1px solid rgba(255,255,255,0.3);
+
+}
+
+
+
+.logo{
+
+    width:80px;
+    height:80px;
+
+    margin:auto;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:white;
+
+    color:#090979;
+
+    font-size:35px;
+    font-weight:bold;
+
+    border-radius:50%;
+
+}
+
+
+h1{
+
+    margin-top:15px;
+
+    font-size:30px;
+
+}
+
+
+.tagline{
+
+    margin-top:8px;
+
+    font-size:14px;
+
+    color:#ddd;
+
+}
+
+
+
+.line{
+
+    height:2px;
+
+    background:white;
+
+    margin:20px 0;
+
+}
+
+
+
+h2{
+
+    font-size:20px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+ul{
+
+    list-style:none;
+
+    text-align:left;
+
+}
+
+
+
+ul li{
+
+    margin:10px 0;
+
+    font-size:15px;
+
+}
+
+
+
+.contact{
+
+    margin-top:20px;
+
+    font-size:14px;
+
+    line-height:25px;
+
+}
+
+
+
+button{
+
+    margin-top:20px;
+
+    padding:12px 25px;
+
+    border:none;
+
+    border-radius:30px;
+
+    background:white;
+
+    color:#090979;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+button:hover{
+
+    background:#00d4ff;
+
+    color:white;
+
+}

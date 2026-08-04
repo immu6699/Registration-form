@@ -1,0 +1,50 @@
+* {
+    margin: 0;                    /* Remove default margin from all elements */
+    padding: 0;                  /* Remove default padding from all elements */
+    box-sizing: border-box;      /* Include padding and border in element's total width and height */
+}
+
+body {
+    font-family: 'Inter', sans-serif; /* Set the main font family for the entire page */
+    line-height: 1.6;               /* Set line spacing to 1.6 times the font size for better readability */
+    color: #333;                    /* Set default text color to dark gray */
+    overflow-x: hidden;            /* Hide horizontal scrollbar to prevent side-scrolling */
+}
+
+.container {
+    max-width: 1200px;            /* Limit maximum width to 1200 pixels */
+    margin: 0 auto;               /* Center the container horizontally */
+    padding: 0 20px;              /* Add 20px padding on left and right sides */
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;                           /* Fix navbar to viewport, stays in place when scrolling */
+    top: 0;                                   /* Position at the very top of the page */
+    width: 100%;                              /* Make navbar span the full width of the screen */
+    background: rgba(255, 255, 255, 0.95);   /* Semi-transparent white background (95% opacity) */
+    z-index: 1000;                           /* High z-index to ensure navbar appears above other elements */
+    padding: 1rem 0;                         /* Add 1rem padding on top and bottom */
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1); /* Add subtle shadow below navbar */
+}
+
+.nav-container {
+    max-width: 1200px;              /* Limit container width to 1200px */
+    margin: 0 auto;                 /* Center the navigation container */
+    padding: 0 20px;                /* Add 20px padding on left and right */
+    display: flex;                  /* Use flexbox layout */
+    justify-content: space-between; /* Distribute items with space between them */
+    align-items: center;            /* Vertically center all navigation items */
+}
+
+.nav-logo h2 {
+    color: #2d5a3d;        /* Set logo text color to dark green */
+    font-size: 1.8rem;     /* Set logo font size to 1.8rem */
+    font-weight: 700;      /* Make logo text bold (700 weight) */
+}
+
+.nav-menu {
+    display: flex;     /* Display menu items in a horizontal row */
+    list-style: none;  /* Remove bullet points from list items */
+    gap: 2rem;         /* Add 2rem space between menu items */
+}

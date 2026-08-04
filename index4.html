@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colored Application Form with Dynamic Validation and Placeholders</title>
+<style>
+/* CSS styles for the form */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e9ecef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    width: 350px;
+}
+
+h2 {
+    color: #007BFF;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #495057;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da; /* Default border color */
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transitions */
+}
+
+input:focus {
+    border-color: #007BFF; /* Blue border on focus */
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Subtle blue shadow on focus */
+}
+
+/* New CSS for error state on the input itself */
+input.error-border {
+    border-color: #dc3545; /* Red border for errors */
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25); /* Subtle red shadow for errors */
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none; /* Hidden by default */
+}
+</style>
+</head>
+<body>
+<div class="form-container">
+    <form id="applicationForm" onsubmit="return validateAndSubmit()">
+        <h2>Application Form</h2>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <!-- Added placeholder -->
+            <input type="text" id="name" name="name" placeholder="ENTER YOUR NAME" required>
+            <span class="error-message" id="nameError">Name must contain only letters and spaces (min 2 characters).</span>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <!-- Added placeholder -->
+            <input type="tel" id="phone" name="phone" placeholder="Enter 10-digit number" required>
+            <span class="error-message" id="phoneError">Phone number must be exactly 10 digits.</span>
+        </div>
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <!-- Added placeholder -->
+            <input type="number" id="age" name="age" min="1" max="100" placeholder="Between 1 and 100" required>
+            <span class="error-message" id="ageError">Age must be between 1 and 100.</span>
+        </div>
+        <div class="form-group">
+        <label  for="email">email</label>
+        <input type="email" id ="email" name="email" placeholder="ENTER YOUR EMAIL" required>
+         <span class="error-message" id="email error">email  should contain a-z or@/123</span>
+
+
+        <div class="form-group">
+            <label for="time">Preferred Time:</label>
+            <input type="time" id="time" name="time" required>
+        </div>
+        
+        <button type="submit">Submit</button>
+    </form>
+</div>
+<script>
+// Helper function to handle error visuals
+function setError(inputElement, errorElement, show) {
+    if (show) {
+        inputElement.classList.add('error-border');
+        errorElement.style.display = 'block'; // Make the error message visible
+    } else {
+        inputElement.classList.remove('error-border');
+        errorElement.style.display = 'none'; // Hide the error message
+    }
+}
+
+// JavaScript for validation and submission handling
+function validateAndSubmit() {
+    const nameInput = document.getElementById('name');
+    const phoneInput = document.getElementById('phone');
+    const ageInput = document.getElementById('age');
+    const timeInput = document.getElementById('time');
+    const nameError = document.getElementById('nameError');
+    const phoneError = document.getElementById('phoneError');
+    const ageError = document.getElementById('ageError');
+
+    let isValid = true;
+
+    // Reset previous errors
+    setError(nameInput, nameError, false);
+    setError(phoneInput, phoneError, false);
+    setError(ageInput, ageError, false);
+
+    // Name validation (only letters and spaces, min 2 chars)
+    const namePattern = /^[A-Za-z\s]{2,}$/;
+    if (!namePattern.test(nameInput.value)) {
+        setError(nameInput, nameError, true);
+        isValid = false;
+    }
+
+    // Phone number validation (exactly 10 digits)
+    const phonePattern = /^\d{10}$/;
+    if (!phonePattern.test(phoneInput.value)) {
+        setError(phoneInput, phoneError, true);
+        isValid = false;
+    }
+
+    // Age validation (between 1 and 100)
+    const age = parseInt(ageInput.value, 10);
+    if (isNaN(age) || age < 1 || age > 100) {
+        setError(ageInput, ageError, true);
+        isValid = false;
+    }
+
+    // Time validation (basic check if filled)
+    if (!timeInput.value) {
+        isValid = false;
+    }
+
+    if (isValid) {
+        // If validation passes, log the data and show alert
+        console.log("Form Submitted Successfully!");
+        console.log("Name:", nameInput.value);
+        console.log("Phone Number:", phoneInput.value);
+        console.log("Age:", ageInput.value);
+        console.log("Preferred Time:", timeInput.value);
+        alert("Form submitted successfully! Check the console (F12) for details.");
+        return false; // Prevent actual form submission for this example
+    }
+    
+    // If isValid is false, this line ensures the form is not submitted.
+    return false; 
+}
+</script>
+</body>
+</html>

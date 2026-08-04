@@ -1,0 +1,23 @@
+.name{
+    color: red;
+    background-color: blue;
+}
+#cyber{
+    color: #0dff00;
+    background-color:rgb(66, 15, 250);
+}
+*{
+    margin: 10px;
+    padding:10px;
+}
+
+div p {
+    background-color: rgba(255, 0, 0, 0.43);
+    width: 100px;
+    height: 100px;
+}
+
+h1 {
+    color: rgb(255, 255, 255);
+}
+
